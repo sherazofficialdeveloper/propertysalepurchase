@@ -2,8 +2,9 @@
  * Centralized API helper.
  *
  * API_BASE resolution:
+ *   • Explicit runtime config (window.APP_CONFIG.API_BASE_URL) when provided
  *   • Local dev (localhost / 127.0.0.1 / 0.0.0.0)  →  http://<host>:5000/api
- *   • Any deployed frontend (Vercel, Railway, etc.) →  https://hafizsabir.up.railway.app/api
+ *   • Otherwise → same-origin /api
  *
  * Only this file knows the backend URL. All pages call Api.* so this
  * is the single place to update when the backend location changes.
@@ -12,20 +13,24 @@
   'use strict';
 
   // ---- Environment config ----
-  const RAILWAY_API_BASE = 'https://hafizsabir.up.railway.app/api';
   const LOCAL_BACKEND_PORT = 5000;
 
   function resolveBaseUrl() {
     const host = (window.location.hostname || '').toLowerCase();
     const proto = window.location.protocol === 'https:' ? 'https:' : 'http:';
 
+    const configuredBase = global.APP_CONFIG && global.APP_CONFIG.API_BASE_URL;
+    if (typeof configuredBase === 'string' && configuredBase.trim()) {
+      return configuredBase.trim().replace(/\/+$/, '');
+    }
+
     // Local development only
     if (host === 'localhost' || host === '127.0.0.1' || host === '0.0.0.0') {
       return proto + '//' + host + ':' + LOCAL_BACKEND_PORT + '/api';
     }
 
-    // Any deployed frontend → Railway backend
-    return RAILWAY_API_BASE;
+    // Deployed frontends can use same-origin API routes by default.
+    return '/api';
   }
 
   const BASE_URL = resolveBaseUrl();

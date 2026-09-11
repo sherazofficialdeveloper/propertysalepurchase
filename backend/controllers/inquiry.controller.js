@@ -97,12 +97,14 @@ async function listInquiries(req, res, next) {
     if (!req.user) return res.status(401).json({ success: false, message: 'Authentication required.' });
     const q = req.query || {};
     const filter = {};
+    let sellerPropertyIds = null;
 
     if (isAdmin(req.user)) {
       // no scope
     } else if (isSeller(req.user)) {
       const props = await Property.find({ owner: req.user._id }).select('_id');
       const ids = props.map((p) => p._id.toString());
+      sellerPropertyIds = ids;
       if (ids.length === 0) {
         return res.status(200).json({ success: true, inquiries: [], pagination: { page: 1, limit: 20, total: 0, totalPages: 1 } });
       }
@@ -115,7 +117,14 @@ async function listInquiries(req, res, next) {
 
     if (q.status && STATUSES.includes(q.status)) filter.status = q.status;
     if (q.inquiryType) filter.inquiryType = q.inquiryType;
-    if (q.propertyId) filter.propertyId = q.propertyId;
+    if (q.propertyId) {
+      if (isSeller(req.user)) {
+        if (!sellerPropertyIds.includes(String(q.propertyId))) {
+          return res.status(403).json({ success: false, message: 'Not allowed.' });
+        }
+      }
+      filter.propertyId = q.propertyId;
+    }
     if (q.from || q.to) {
       filter.createdAt = {};
       if (q.from) filter.createdAt.$gte = new Date(q.from);
