@@ -3,11 +3,10 @@
  *
  * API_BASE resolution:
  *   • Local dev (localhost / 127.0.0.1 / 0.0.0.0)  →  http://<host>:5000/api
- *   • Everything else (Vercel, Railway, custom domain)
- *                                                  →  https://hafizsabir.up.railway.app/api
+ *   • Any deployed frontend (Vercel, Railway, etc.) →  https://hafizsabir.up.railway.app/api
  *
- * Why: Frontend may be deployed on Vercel, but the backend lives on Railway.
- * All API calls must go to the Railway backend, not to the frontend's own origin.
+ * Only this file knows the backend URL. All pages call Api.* so this
+ * is the single place to update when the backend location changes.
  */
 (function (global) {
   'use strict';
@@ -25,7 +24,7 @@
       return proto + '//' + host + ':' + LOCAL_BACKEND_PORT + '/api';
     }
 
-    // Any deployed frontend (Vercel, Railway frontend, custom domain) → Railway backend
+    // Any deployed frontend → Railway backend
     return RAILWAY_API_BASE;
   }
 
