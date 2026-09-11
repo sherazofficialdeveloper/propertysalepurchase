@@ -1,45 +1,43 @@
 /**
  * Centralized API helper.
  *
- * Auto-detects base URL based on where the frontend is being served:
- *   • Local dev (localhost / 127.0.0.1)  →  http://<same-host>:5000/api
- *   • Railway production                 →  https://hafizsabir.up.railway.app/api
- *   • Any other host                     →  <current-origin>/api
+ * API_BASE resolution:
+ *   • Local dev (localhost / 127.0.0.1 / 0.0.0.0)  →  http://<host>:5000/api
+ *   • Everything else (Vercel, Railway, custom domain)
+ *                                                  →  https://hafizsabir.up.railway.app/api
  *
- * No manual edits needed between environments.
+ * Why: Frontend may be deployed on Vercel, but the backend lives on Railway.
+ * All API calls must go to the Railway backend, not to the frontend's own origin.
  */
 (function (global) {
   'use strict';
 
-  // ---- Resolve API base URL for the current environment ----
-  const RAILWAY_HOST = 'hafizsabir.up.railway.app';
+  // ---- Environment config ----
+  const RAILWAY_API_BASE = 'https://hafizsabir.up.railway.app/api';
   const LOCAL_BACKEND_PORT = 5000;
 
   function resolveBaseUrl() {
-    const host = window.location.hostname || 'localhost';
+    const host = (window.location.hostname || '').toLowerCase();
     const proto = window.location.protocol === 'https:' ? 'https:' : 'http:';
 
-    // Local development: frontend on localhost:5500, backend on localhost:5000.
-    if (host === 'localhost' || host === '127.0.0.1') {
+    // Local development only
+    if (host === 'localhost' || host === '127.0.0.1' || host === '0.0.0.0') {
       return proto + '//' + host + ':' + LOCAL_BACKEND_PORT + '/api';
     }
 
-    // Railway (or any custom domain): backend on the same origin.
-    if (host === RAILWAY_HOST) {
-      return 'https://' + RAILWAY_HOST + '/api';
-    }
-
-    // Fallback: same origin /api
-    return window.location.origin + '/api';
+    // Any deployed frontend (Vercel, Railway frontend, custom domain) → Railway backend
+    return RAILWAY_API_BASE;
   }
 
   const BASE_URL = resolveBaseUrl();
+  // Debug — visible in DevTools console
+  try { console.log('[api] BASE_URL =', BASE_URL); } catch (_) {}
 
   async function request(method, path, body) {
     const options = {
       method,
       headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
+      credentials: 'include', // send/receive the HTTP-only auth cookie
     };
     if (body !== undefined) options.body = JSON.stringify(body);
 
@@ -49,7 +47,7 @@
     try { data = text ? JSON.parse(text) : null; } catch { data = null; }
 
     if (!res.ok) {
-      const error = new Error((data && data.message) || `Request failed (${res.status})`);
+      const error = new Error((data && data.message) || ('Request failed (' + res.status + ')'));
       error.status = res.status;
       error.data = data;
       throw error;
