@@ -1,12 +1,39 @@
 /**
  * Centralized API helper.
+ *
+ * Auto-detects base URL based on where the frontend is being served:
+ *   • Local dev (localhost / 127.0.0.1)  →  http://<same-host>:5000/api
+ *   • Railway production                 →  https://hafizsabir.up.railway.app/api
+ *   • Any other host                     →  <current-origin>/api
+ *
+ * No manual edits needed between environments.
  */
 (function (global) {
   'use strict';
 
-  const API_HOST = window.location.hostname || 'localhost';
-  const API_PROTOCOL = window.location.protocol === 'https:' ? 'https:' : 'http:';
-  const BASE_URL = `${API_PROTOCOL}//${API_HOST}:5000/api`;
+  // ---- Resolve API base URL for the current environment ----
+  const RAILWAY_HOST = 'hafizsabir.up.railway.app';
+  const LOCAL_BACKEND_PORT = 5000;
+
+  function resolveBaseUrl() {
+    const host = window.location.hostname || 'localhost';
+    const proto = window.location.protocol === 'https:' ? 'https:' : 'http:';
+
+    // Local development: frontend on localhost:5500, backend on localhost:5000.
+    if (host === 'localhost' || host === '127.0.0.1') {
+      return proto + '//' + host + ':' + LOCAL_BACKEND_PORT + '/api';
+    }
+
+    // Railway (or any custom domain): backend on the same origin.
+    if (host === RAILWAY_HOST) {
+      return 'https://' + RAILWAY_HOST + '/api';
+    }
+
+    // Fallback: same origin /api
+    return window.location.origin + '/api';
+  }
+
+  const BASE_URL = resolveBaseUrl();
 
   async function request(method, path, body) {
     const options = {
@@ -31,6 +58,7 @@
   }
 
   global.Api = {
+    baseUrl: BASE_URL,
     get: (p) => request('GET', p),
     post: (p, b) => request('POST', p, b),
     put: (p, b) => request('PUT', p, b),
@@ -66,15 +94,23 @@
     },
     admin: {
       users: (qs) => request('GET', '/admin/users' + (qs ? '?' + qs : '')),
-      setUserStatus: (id, isActive) => request('PUT', `/admin/users/${encodeURIComponent(id)}/status`, { isActive }),
-      setUserRole: (id, role) => request('PUT', `/admin/users/${encodeURIComponent(id)}/role`, { role }),
+      setUserStatus: (id, isActive) => request('PUT', '/admin/users/' + encodeURIComponent(id) + '/status', { isActive }),
+      setUserRole: (id, role) => request('PUT', '/admin/users/' + encodeURIComponent(id) + '/role', { role }),
     },
     favorites: {
       list: () => request('GET', '/favorites'),
       ids: () => request('GET', '/favorites/ids'),
-      status: (propertyId) => request('GET', `/favorites/${encodeURIComponent(propertyId)}/status`),
-      add: (propertyId) => request('POST', `/favorites/${encodeURIComponent(propertyId)}`),
-      remove: (propertyId) => request('DELETE', `/favorites/${encodeURIComponent(propertyId)}`),
+      status: (propertyId) => request('GET', '/favorites/' + encodeURIComponent(propertyId) + '/status'),
+      add: (propertyId) => request('POST', '/favorites/' + encodeURIComponent(propertyId)),
+      remove: (propertyId) => request('DELETE', '/favorites/' + encodeURIComponent(propertyId)),
+    },
+    notifications: {
+      list: (qs) => request('GET', '/notifications' + (qs ? '?' + qs : '')),
+      unreadCount: () => request('GET', '/notifications/unread-count'),
+      get: (id) => request('GET', '/notifications/' + encodeURIComponent(id)),
+      markRead: (id) => request('PUT', '/notifications/' + encodeURIComponent(id) + '/read'),
+      markAllRead: () => request('PUT', '/notifications/read-all'),
+      remove: (id) => request('DELETE', '/notifications/' + encodeURIComponent(id)),
     },
   };
 })(window);
