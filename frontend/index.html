@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="EstateHub - Discover, buy and sell properties with confidence." />
+  <title>EstateHub - Find Your Next Property</title>
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/home.css" />
+  <link rel="stylesheet" href="css/notifications.css" />
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <span class="topbar-msg">Find your perfect property with confidence</span>
+      <div class="topbar-links">
+        <a href="tel:+920000000000">+92 000 000 0000</a>
+        <span class="topbar-divider" aria-hidden="true"></span>
+        <a href="mailto:hello@estatehub.test">hello@estatehub.test</a>
+        <span class="topbar-divider" aria-hidden="true"></span>
+        <a href="login.html" class="topbar-auth">Login / Register</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a href="#" class="brand" aria-label="EstateHub home">
+        <span class="brand-mark" aria-hidden="true">E</span>
+        <span class="brand-name">Estate<span>Hub</span></span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+       <ul class="nav-links">
+        <li><a href="index.html" class="nav-link is-active">Home</a></li>
+        <li><a href="properties.html" class="nav-link">Properties</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+        <div class="nav-actions">
+          <a href="login.html" class="btn btn-ghost">Login</a>
+          <a href="register.html" class="btn btn-outline">Register</a>
+          <a href="property-form.html" class="btn btn-gold">List Property</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-inner">
+        <div class="hero-content">
+          <span class="eyebrow">Find Your Next Property</span>
+          <h1>Find a Place You'll Love to Call Home</h1>
+          <p class="hero-sub">Explore verified properties for sale and find the right home, apartment, plot or commercial space for your needs.</p>
+          <div class="hero-cta">
+            <a href="#properties" class="btn btn-gold btn-lg">Explore Properties</a>
+            <a href="#" class="btn btn-light btn-lg">List Your Property</a>
+          </div>
+          <ul class="hero-stats" aria-label="Platform highlights">
+            <li><strong>12k+</strong><span>Listings</span></li>
+            <li><strong>8k+</strong><span>Happy Clients</span></li>
+            <li><strong>150+</strong><span>Cities</span></li>
+          </ul>
+        </div>
+
+        <aside class="hero-float-card" aria-label="Featured property preview">
+          <span class="badge badge-gold">Featured</span>
+          <div class="hero-float-img" aria-hidden="true">
+          <img src="data:image/jpeg;base64,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" alt="">
+          </div>
+          <h3>Modern Family Villa</h3>
+          <p class="property-location">Islamabad, Pakistan</p>
+          <p class="price">PKR 28,500,000</p>
+          <div class="hero-float-meta">
+            <span>4 Beds</span><span>3 Baths</span><span>2,400 sqft</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <div class="container search-panel-wrap">
+      <form class="search-panel" id="heroSearchForm" novalidate aria-label="Property search">
+        <div class="search-panel-head">
+          <h2>Search Properties</h2>
+          <a href="#" class="btn-link">Advanced Search</a>
+        </div>
+
+        <div class="search-grid">
+          <div class="field">
+            <label for="location">Location</label>
+            <input type="text" id="location" name="location" placeholder="Enter city or location" />
+          </div>
+          <div class="field">
+            <label for="propertyType">Property Type</label>
+            <select id="propertyType" name="propertyType">
+              <option value="">Any</option>
+              <option value="house">House</option>
+              <option value="apartment">Apartment</option>
+              <option value="commercial">Commercial</option>
+              <option value="plot">Plot</option>
+              <option value="office">Office</option>
+              <option value="shop">Shop</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="purpose">Purpose</label>
+            <select id="purpose" name="purpose">
+              <option value="">Any</option>
+              <option value="sale">For Sale</option>
+              <option value="purchase">For Purchase</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="minPrice">Min Price</label>
+            <input type="number" id="minPrice" name="minPrice" min="0" placeholder="0" />
+          </div>
+          <div class="field">
+            <label for="maxPrice">Max Price</label>
+            <input type="number" id="maxPrice" name="maxPrice" min="0" placeholder="100000000" />
+          </div>
+          <div class="field field-action">
+            <button type="submit" class="btn btn-primary btn-block">Search Property</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <section class="section" id="categories">
+      <div class="container">
+        <header class="section-head">
+          <h2>Explore Property Categories</h2>
+          <p>Browse properties based on what you're looking for.</p>
+        </header>
+
+        <div class="category-grid">
+          <article class="category-card"><div class="category-icon" aria-hidden="true">H</div><h3>Houses</h3><p>Comfortable homes for families.</p><div class="category-foot"><span class="category-count">2,340 properties</span><span class="category-arrow" aria-hidden="true">&rarr;</span></div></article>
+          <article class="category-card"><div class="category-icon" aria-hidden="true">A</div><h3>Apartments</h3><p>Modern apartments in prime locations.</p><div class="category-foot"><span class="category-count">1,820 properties</span><span class="category-arrow" aria-hidden="true">&rarr;</span></div></article>
+          <article class="category-card"><div class="category-icon" aria-hidden="true">C</div><h3>Commercial</h3><p>Spaces built for businesses.</p><div class="category-foot"><span class="category-count">640 properties</span><span class="category-arrow" aria-hidden="true">&rarr;</span></div></article>
+          <article class="category-card"><div class="category-icon" aria-hidden="true">P</div><h3>Plots</h3><p>Find land for your next project.</p><div class="category-foot"><span class="category-count">980 properties</span><span class="category-arrow" aria-hidden="true">&rarr;</span></div></article>
+          <article class="category-card"><div class="category-icon" aria-hidden="true">O</div><h3>Offices</h3><p>Professional workspaces.</p><div class="category-foot"><span class="category-count">420 properties</span><span class="category-arrow" aria-hidden="true">&rarr;</span></div></article>
+          <article class="category-card"><div class="category-icon" aria-hidden="true">S</div><h3>Shops</h3><p>Commercial spaces for your business.</p><div class="category-foot"><span class="category-count">310 properties</span><span class="category-arrow" aria-hidden="true">&rarr;</span></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-muted" id="properties">
+      <div class="container">
+        <header class="section-head-row">
+          <div>
+            <h2>Featured Properties</h2>
+            <p>Explore some of the most attractive properties currently available.</p>
+          </div>
+          <a href="properties.html" class="btn btn-outline">View All Properties</a>
+        </header>
+
+        <div class="property-grid">
+          <article class="property-card">
+            <div class="property-media">
+              <span class="badge badge-sale">For Sale</span>
+              <button class="fav-btn" type="button" aria-pressed="false" aria-label="Save property">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.5-9.4C.7 8.3 2.6 4.5 6.3 4.1c2-.2 3.8.8 4.8 2.5.5.9.7 1.4.9 1.4s.4-.5.9-1.4c1-1.7 2.8-2.7 4.8-2.5 3.7.4 5.6 4.2 3.8 7.5-2 4.8-9.5 9.4-9.5 9.4z"/></svg>
+              </button>
+              <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=800&q=70" alt="Modern family villa in Islamabad" loading="lazy" />
+            </div>
+            <div class="property-body">
+              <span class="property-type">Villa</span>
+              <h3 class="property-title">Modern Family Villa</h3>
+              <p class="property-location">Islamabad, Pakistan</p>
+              <ul class="property-meta"><li>4 Beds</li><li>3 Baths</li><li>2,400 sqft</li></ul>
+              <div class="property-footer">
+                <span class="property-price">PKR 28,500,000</span>
+                <a href="property-details.html?id=6aa3961b1447c7d811cbd5cc" class="btn btn-primary btn-sm">View Details</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="property-card">
+            <div class="property-media">
+              <span class="badge badge-sale">For Sale</span>
+              <button class="fav-btn" type="button" aria-pressed="false" aria-label="Save property">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.5-9.4C.7 8.3 2.6 4.5 6.3 4.1c2-.2 3.8.8 4.8 2.5.5.9.7 1.4.9 1.4s.4-.5.9-1.4c1-1.7 2.8-2.7 4.8-2.5 3.7.4 5.6 4.2 3.8 7.5-2 4.8-9.5 9.4-9.5 9.4z"/></svg>
+              </button>
+              <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=70" alt="Luxury apartment in Lahore" loading="lazy" />
+            </div>
+            <div class="property-body">
+              <span class="property-type">Apartment</span>
+              <h3 class="property-title">Luxury City Apartment</h3>
+              <p class="property-location">Lahore, Pakistan</p>
+              <ul class="property-meta"><li>3 Beds</li><li>2 Baths</li><li>1,650 sqft</li></ul>
+              <div class="property-footer">
+                <span class="property-price">PKR 15,900,000</span>
+                <a href="property-details.html?id=6aa396181447c7d811cbd5c3" class="btn btn-primary btn-sm">View Details</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="property-card">
+            <div class="property-media">
+              <span class="badge badge-gold">Featured</span>
+              <button class="fav-btn" type="button" aria-pressed="false" aria-label="Save property">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.5-9.4C.7 8.3 2.6 4.5 6.3 4.1c2-.2 3.8.8 4.8 2.5.5.9.7 1.4.9 1.4s.4-.5.9-1.4c1-1.7 2.8-2.7 4.8-2.5 3.7.4 5.6 4.2 3.8 7.5-2 4.8-9.5 9.4-9.5 9.4z"/></svg>
+              </button>
+              <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=70" alt="Family house in Karachi" loading="lazy" />
+            </div>
+            <div class="property-body">
+              <span class="property-type">House</span>
+              <h3 class="property-title">Elegant Family House</h3>
+              <p class="property-location">Karachi, Pakistan</p>
+              <ul class="property-meta"><li>5 Beds</li><li>4 Baths</li><li>3,200 sqft</li></ul>
+              <div class="property-footer">
+                <span class="property-price">PKR 42,000,000</span>
+                <a href="property-details.html?id=6aa396161447c7d811cbd5ba" class="btn btn-primary btn-sm">View Details</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="browse-types">
+      <div class="container">
+        <header class="section-head">
+          <h2>Browse by Property Type</h2>
+          <p>Choose a category to start exploring properties that fit your needs.</p>
+        </header>
+
+        <div class="type-grid">
+          <article class="type-card type-residential">
+            <h3>Residential</h3>
+            <p>Find homes and apartments designed for comfortable living.</p>
+            <a href="#" class="btn btn-light btn-sm">Explore</a>
+          </article>
+          <article class="type-card type-commercial">
+            <h3>Commercial</h3>
+            <p>Discover offices, shops and business spaces.</p>
+            <a href="#" class="btn btn-light btn-sm">Explore</a>
+          </article>
+          <article class="type-card type-land">
+            <h3>Land</h3>
+            <p>Explore plots and development opportunities.</p>
+            <a href="#" class="btn btn-light btn-sm">Explore</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container">
+        <header class="section-head">
+          <h2>Why Choose Our Property Platform?</h2>
+          <p>We make property discovery simpler, clearer and more convenient.</p>
+        </header>
+
+        <div class="why-grid">
+          <article class="why-item"><div class="why-icon" aria-hidden="true">1</div><h3>Easy Property Search</h3><p>Find properties using simple and powerful search options.</p></article>
+          <article class="why-item"><div class="why-icon" aria-hidden="true">2</div><h3>Detailed Property Information</h3><p>View complete property specifications, images and important details.</p></article>
+          <article class="why-item"><div class="why-icon" aria-hidden="true">3</div><h3>Simple Inquiry Process</h3><p>Contact sellers or agents quickly through our inquiry system.</p></article>
+          <article class="why-item"><div class="why-icon" aria-hidden="true">4</div><h3>Responsive Experience</h3><p>Browse properties comfortably on desktop, tablet or mobile.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-muted">
+      <div class="container">
+        <header class="section-head">
+          <h2>How It Works</h2>
+          <p>Finding the right property is simple.</p>
+        </header>
+
+        <ol class="steps">
+          <li class="step"><span class="step-number">01</span><h3>Search</h3><p>Search properties based on location, type and price.</p></li>
+          <li class="step"><span class="step-number">02</span><h3>Explore</h3><p>Review images, specifications and complete property details.</p></li>
+          <li class="step"><span class="step-number">03</span><h3>Send Inquiry</h3><p>Contact the seller or agent with your requirements.</p></li>
+          <li class="step"><span class="step-number">04</span><h3>Complete the Process</h3><p>Continue the buying or selling process with the relevant party.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <header class="section-head">
+          <h2>Explore Popular Locations</h2>
+          <p>Discover properties in locations people are searching for.</p>
+        </header>
+
+        <div class="location-grid">
+          <a href="#" class="location-card loc-isb"><div><h3>Islamabad</h3><span>2,140 properties</span></div></a>
+          <a href="#" class="location-card loc-lhr"><div><h3>Lahore</h3><span>3,820 properties</span></div></a>
+          <a href="#" class="location-card loc-khi"><div><h3>Karachi</h3><span>4,610 properties</span></div></a>
+          <a href="#" class="location-card loc-rwp"><div><h3>Rawalpindi</h3><span>1,240 properties</span></div></a>
+          <a href="#" class="location-card loc-psh"><div><h3>Peshawar</h3><span>870 properties</span></div></a>
+          <a href="#" class="location-card loc-mux"><div><h3>Multan</h3><span>640 properties</span></div></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container cta-inner">
+        <div>
+          <h2>Ready to Find Your Next Property?</h2>
+          <p>Explore available properties or list your property and connect with interested buyers.</p>
+        </div>
+        <div class="cta-actions">
+          <a href="#properties" class="btn btn-gold btn-lg">Browse Properties</a>
+          <a href="#" class="btn btn-light btn-lg">List Your Property</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="contact">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="brand">
+          <span class="brand-mark" aria-hidden="true">E</span>
+          <span class="brand-name">Estate<span>Hub</span></span>
+        </a>
+        <p>A modern property marketplace to buy, sell, and explore homes, apartments, plots and commercial spaces with confidence.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="Twitter">t</a>
+          <a href="#" aria-label="Instagram">in</a>
+          <a href="#" aria-label="LinkedIn">li</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#properties">Properties</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Categories</h4>
+        <ul>
+          <li><a href="#">Houses</a></li>
+          <li><a href="#">Apartments</a></li>
+          <li><a href="#">Commercial</a></li>
+          <li><a href="#">Plots</a></li>
+          <li><a href="#">Offices</a></li>
+          <li><a href="#">Shops</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+920000000000">+92 000 000 0000</a></li>
+          <li><a href="mailto:hello@estatehub.test">hello@estatehub.test</a></li>
+          <li>Office #12, Blue Area, Islamabad</li>
+          <li>Mon-Sat, 9:00am - 6:00pm</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>&copy; <span id="year"></span> EstateHub. All rights reserved.</p>
+        <ul class="footer-legal">
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/data/images.js"></script>
+  <script src="js/ui/navbar.js"></script>
+  <script src="js/ui/favorite.js"></script>
+  <script src="js/ui/search.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/notifications.js"></script>
+  <script src="js/data/properties.data.js"></script>
+  <script src="js/data/fallback.js"></script>
+</body>
+</html>

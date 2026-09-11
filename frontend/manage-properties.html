@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage Properties — EstateHub</title>
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/home.css" />
+  <link rel="stylesheet" href="css/properties.css" />
+  <link rel="stylesheet" href="css/manage.css" />
+  <link rel="stylesheet" href="css/notifications.css" />
+</head>
+<body>
+
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="EstateHub home">
+        <span class="brand-mark" aria-hidden="true">E</span>
+        <span class="brand-name">Estate<span>Hub</span></span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="properties.html" class="nav-link">Properties</a></li>
+          <li><a href="manage-properties.html" class="nav-link is-active">Manage</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="nav-actions"></div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <!-- Forbidden state -->
+        <div class="state-card" id="mpForbidden" hidden>
+          <div class="state-icon" aria-hidden="true">🔒</div>
+          <h3>Access Restricted</h3>
+          <p>You need a seller or admin account to manage properties.</p>
+          <a href="login.html?next=manage-properties.html" class="btn btn-primary">Sign In</a>
+        </div>
+
+        <div id="mpContent" hidden>
+          <header class="mp-header">
+            <div>
+              <h1>Manage Properties</h1>
+              <p>Create, edit and manage your property listings.</p>
+            </div>
+            <a href="property-form.html" class="btn btn-primary">+ Add Property</a>
+          </header>
+
+          <div class="mp-scope" id="mpScope" hidden>
+            <button type="button" data-scope="mine" class="is-active">My Properties</button>
+            <button type="button" data-scope="all">All Properties</button>
+          </div>
+
+          <div class="mp-table-wrap">
+            <table class="mp-table">
+              <thead>
+                <tr>
+                  <th>Property</th><th>Price</th><th>Status</th>
+                  <th>Featured</th><th>Published</th><th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="mpTableBody"></tbody>
+            </table>
+          </div>
+
+          <div class="state-card mt-6" id="mpEmpty" hidden>
+            <div class="state-icon" aria-hidden="true">🏚</div>
+            <h3>You haven't listed any properties yet.</h3>
+            <p>Start by adding your first property listing.</p>
+            <a href="property-form.html" class="btn btn-primary">Add Your First Property</a>
+          </div>
+
+          <div class="state-card mt-6" id="mpError" hidden>
+            <div class="state-icon" aria-hidden="true">⚠</div>
+            <h3>Unable to Load Properties</h3>
+            <p id="mpErrorMsg">Something went wrong. Please try again.</p>
+            <button type="button" class="btn btn-primary" id="mpRetry">Try Again</button>
+          </div>
+
+          <div class="mt-6" id="mpLoading" hidden>
+            <p class="muted">Loading properties…</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-bottom-inner">
+      <p>&copy; <span id="year"></span> EstateHub. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/state/session.js"></script>
+  <script src="js/ui/navbar.js"></script>
+  <script src="js/ui/share.js"></script>
+  <script src="js/pages/manage-properties.js"></script>
+  <script>document.addEventListener('DOMContentLoaded',()=>{const y=document.getElementById('year');if(y)y.textContent=new Date().getFullYear();});</script>
+  <script src="js/notifications.js"></script>
+  <script src="js/data/properties.data.js"></script>
+  <script src="js/data/fallback.js"></script>
+</body>
+</html>

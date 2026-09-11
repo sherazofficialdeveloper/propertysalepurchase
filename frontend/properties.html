@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Browse verified properties for sale — houses, apartments, plots, offices and shops." />
+  <title>Properties — EstateHub</title>
+
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/home.css" />
+  <link rel="stylesheet" href="css/properties.css" />
+  <link rel="stylesheet" href="css/notifications.css" />
+</head>
+<body>
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <span class="topbar-msg">Find your perfect property with confidence</span>
+      <div class="topbar-links">
+        <a href="tel:+920000000000">+92 000 000 0000</a>
+        <span class="topbar-divider" aria-hidden="true"></span>
+        <a href="mailto:hello@estatehub.test">hello@estatehub.test</a>
+        <span class="topbar-divider" aria-hidden="true"></span>
+        <a href="login.html" class="topbar-auth">Login / Register</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar (same as Home) -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="EstateHub home">
+        <span class="brand-mark" aria-hidden="true">E</span>
+        <span class="brand-name">Estate<span>Hub</span></span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="properties.html" class="nav-link is-active">Properties</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+          <a href="login.html" class="btn btn-ghost">Login</a>
+          <a href="register.html" class="btn btn-outline">Register</a>
+          <a href="property-form.html" class="btn btn-gold">List Property</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. Page Header -->
+    <section class="page-header">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <span aria-hidden="true">/</span>
+          <span>Properties</span>
+        </nav>
+        <h1>Find Your Perfect Property</h1>
+        <p>Explore properties that match your location, budget and requirements.</p>
+      </div>
+    </section>
+
+    <!-- 2. Search Bar -->
+    <div class="container search-bar-wrap">
+      <form class="search-bar" id="propertiesSearchForm" novalidate aria-label="Search properties">
+        <div class="search-bar-grid">
+          <div class="field">
+            <label for="sLocation">Location</label>
+            <input type="text" id="sLocation" name="location" placeholder="City or area" />
+          </div>
+          <div class="field">
+            <label for="sType">Property Type</label>
+            <select id="sType" name="type">
+              <option value="">All Types</option>
+              <option value="House">House</option>
+              <option value="Apartment">Apartment</option>
+              <option value="Commercial">Commercial</option>
+              <option value="Plot">Plot</option>
+              <option value="Office">Office</option>
+              <option value="Shop">Shop</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="sPurpose">Purpose</label>
+            <select id="sPurpose" name="purpose">
+              <option value="">All</option>
+              <option value="Sale">For Sale</option>
+              <option value="Purchase">For Purchase</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="sMinPrice">Min Price</label>
+            <input type="number" id="sMinPrice" name="minPrice" min="0" placeholder="0" />
+          </div>
+          <div class="field">
+            <label for="sMaxPrice">Max Price</label>
+            <input type="number" id="sMaxPrice" name="maxPrice" min="0" placeholder="100000000" />
+          </div>
+          <div class="field field-action">
+            <button type="submit" class="btn btn-primary btn-block">Search</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- 3. Layout: filters + results -->
+    <section class="section">
+      <div class="container">
+        <div class="results-layout">
+
+          <!-- Mobile filter toggle -->
+          <button type="button" class="btn btn-outline mobile-filter-toggle" id="mobileFilterToggle" aria-expanded="false" aria-controls="filterPanel">
+            Show Filters
+          </button>
+
+          <!-- 4. Sidebar filters -->
+          <aside class="filter-panel" id="filterPanel" aria-label="Advanced filters">
+            <h3>Filters</h3>
+
+            <div class="filter-group">
+              <h4>Property Type</h4>
+              <div class="field">
+                <select id="fType" aria-label="Filter by property type">
+                  <option value="">All Types</option>
+                  <option value="House">House</option>
+                  <option value="Apartment">Apartment</option>
+                  <option value="Commercial">Commercial</option>
+                  <option value="Plot">Plot</option>
+                  <option value="Office">Office</option>
+                  <option value="Shop">Shop</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <h4>Location</h4>
+              <div class="field">
+                <input type="text" id="fCity" placeholder="City or area" />
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <h4>Purpose</h4>
+              <div class="field">
+                <select id="fPurpose">
+                  <option value="">Any</option>
+                  <option value="Sale">Sale</option>
+                  <option value="Purchase">Purchase</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <h4>Price Range</h4>
+              <div class="field"><input type="number" id="fMinPrice" placeholder="Min price" min="0" /></div>
+              <div class="field mt-4"><input type="number" id="fMaxPrice" placeholder="Max price" min="0" /></div>
+            </div>
+
+            <div class="filter-group">
+              <h4>Bedrooms</h4>
+              <div class="field">
+                <select id="fBedrooms">
+                  <option value="">Any</option>
+                  <option value="1">1+</option>
+                  <option value="2">2+</option>
+                  <option value="3">3+</option>
+                  <option value="4">4+</option>
+                  <option value="5">5+</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <h4>Bathrooms</h4>
+              <div class="field">
+                <select id="fBathrooms">
+                  <option value="">Any</option>
+                  <option value="1">1+</option>
+                  <option value="2">2+</option>
+                  <option value="3">3+</option>
+                  <option value="4">4+</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <h4>Area (sq ft)</h4>
+              <div class="field"><input type="number" id="fMinArea" placeholder="Min area" min="0" /></div>
+              <div class="field mt-4"><input type="number" id="fMaxArea" placeholder="Max area" min="0" /></div>
+            </div>
+
+            <div class="filter-group">
+              <h4>Status</h4>
+              <div class="field">
+                <select id="fStatus">
+                  <option value="">Any</option>
+                  <option value="Available">Available</option>
+                  <option value="Sold">Sold</option>
+                  <option value="Pending">Pending</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <h4>Features</h4>
+              <div class="filter-checks">
+                <label><input type="checkbox" id="fParking" /> Parking Available</label>
+                <label><input type="checkbox" id="fFurnished" /> Furnished</label>
+                <label><input type="checkbox" id="fFeatured" /> Featured</label>
+              </div>
+            </div>
+
+            <div class="filter-actions">
+              <button type="button" class="btn btn-primary" id="applyFilters">Apply Filters</button>
+              <button type="button" class="btn btn-outline" id="resetFilters">Reset</button>
+            </div>
+          </aside>
+
+          <!-- Results column -->
+          <div class="results-column">
+
+            <!-- 5. Active chips -->
+            <div class="active-chips" id="activeChips" aria-label="Active filters"></div>
+
+            <!-- 6. Toolbar -->
+            <div class="results-toolbar" id="resultsTop">
+              <p class="results-summary" id="resultSummary">Loading…</p>
+              <div class="sort-control">
+                <label for="sortSelect">Sort By</label>
+                <select id="sortSelect">
+                  <option value="featured">Featured</option>
+                  <option value="newest">Newest</option>
+                  <option value="price_asc">Price: Low to High</option>
+                  <option value="price_desc">Price: High to Low</option>
+                  <option value="area_asc">Area: Small to Large</option>
+                  <option value="area_desc">Area: Large to Small</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- 7. Property grid -->
+            <div id="dataNotice" class="data-notice" hidden role="status"></div>
+            <div class="property-grid" id="propertyGrid" aria-live="polite"></div>
+
+            <!-- 8. Empty state -->
+            <div class="state-card" id="emptyState" hidden>
+              <div class="state-icon" aria-hidden="true">🏚</div>
+              <h3>No Properties Found</h3>
+              <p>We couldn't find properties matching your current filters. Try adjusting your search criteria.</p>
+              <button type="button" class="btn btn-primary" id="emptyReset">Reset Filters</button>
+            </div>
+
+            <!-- 12. Error state -->
+            <div class="state-card" id="errorState" hidden>
+              <div class="state-icon" aria-hidden="true">⚠</div>
+              <h3>Unable to Load Properties</h3>
+              <p>Something went wrong while loading properties. Please try again.</p>
+              <button type="button" class="btn btn-primary" id="errorRetry">Try Again</button>
+            </div>
+
+            <!-- 13. Pagination -->
+            <nav class="pagination" id="pagination" aria-label="Pagination"></nav>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. CTA -->
+    <section class="cta">
+      <div class="container cta-inner">
+        <div>
+          <h2>Can't find what you're looking for?</h2>
+          <p>List your requirement and let sellers reach out to you.</p>
+        </div>
+        <div class="cta-actions">
+          <a href="#" class="btn btn-gold btn-lg">Post Requirement</a>
+          <a href="index.html#contact" class="btn btn-light btn-lg">Contact Us</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer (same as Home) -->
+  <footer class="site-footer" id="contact">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="brand">
+          <span class="brand-mark" aria-hidden="true">E</span>
+          <span class="brand-name">Estate<span>Hub</span></span>
+        </a>
+        <p>A modern property marketplace to buy, sell, and explore homes, apartments, plots and commercial spaces with confidence.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="Twitter">t</a>
+          <a href="#" aria-label="Instagram">in</a>
+          <a href="#" aria-label="LinkedIn">li</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="properties.html">Properties</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Categories</h4>
+        <ul>
+          <li><a href="properties.html?type=House">Houses</a></li>
+          <li><a href="properties.html?type=Apartment">Apartments</a></li>
+          <li><a href="properties.html?type=Commercial">Commercial</a></li>
+          <li><a href="properties.html?type=Plot">Plots</a></li>
+          <li><a href="properties.html?type=Office">Offices</a></li>
+          <li><a href="properties.html?type=Shop">Shops</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+920000000000">+92 000 000 0000</a></li>
+          <li><a href="mailto:hello@estatehub.test">hello@estatehub.test</a></li>
+          <li>Office #12, Blue Area, Islamabad</li>
+          <li>Mon-Sat, 9:00am - 6:00pm</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>&copy; <span id="year"></span> EstateHub. All rights reserved.</p>
+        <ul class="footer-legal">
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts (order matters) -->
+  <script src="js/api.js"></script>
+  <script src="js/data/properties.data.js"></script>
+  <script src="js/data/fallback.js"></script>
+  <script src="js/state/filters.js"></script>
+  <script src="js/ui/navbar.js"></script>
+  <script src="js/favorites.js"></script>
+  <script src="js/ui/property-card.js"></script>
+  <script src="js/ui/filters.js"></script>
+  <script src="js/ui/active-chips.js"></script>
+  <script src="js/ui/sort.js"></script>
+  <script src="js/ui/pagination.js"></script>
+  <script src="js/pages/properties.js"></script>
+  <script>
+    // set year on this page too
+    document.addEventListener('DOMContentLoaded', () => {
+      const y = document.getElementById('year');
+      if (y) y.textContent = new Date().getFullYear();
+    });
+  </script>
+  <script src="js/notifications.js"></script>
+</body>
+</html>

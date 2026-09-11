@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="pfTitle">Property Form — EstateHub</title>
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/home.css" />
+  <link rel="stylesheet" href="css/properties.css" />
+  <link rel="stylesheet" href="css/manage.css" />
+  <link rel="stylesheet" href="css/notifications.css" />
+</head>
+<body>
+
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="EstateHub home">
+        <span class="brand-mark" aria-hidden="true">E</span>
+        <span class="brand-name">Estate<span>Hub</span></span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="properties.html" class="nav-link">Properties</a></li>
+          <li><a href="manage-properties.html" class="nav-link is-active">Manage</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="nav-actions"></div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="mp-header">
+          <div>
+            <h1 id="pfHeading">Add New Property</h1>
+            <p>Fill in the details below. Fields marked * are required.</p>
+          </div>
+          <a href="manage-properties.html" class="btn btn-ghost">← Back to Manage</a>
+        </div>
+
+        <div class="alert alert-error" id="formBanner" hidden role="alert"></div>
+
+        <form class="form-layout" id="propertyForm" novalidate>
+          <!-- Basic -->
+          <div class="form-section">
+            <h3>Basic Information</h3>
+            <div class="form-grid">
+              <div class="field full">
+                <label for="title">Property Title *</label>
+                <input type="text" name="title" id="title" placeholder="e.g. Modern Family Villa" required />
+                <div class="field-error" data-error-for="title" hidden></div>
+              </div>
+              <div class="field full">
+                <label for="description">Description *</label>
+                <textarea name="description" id="description" rows="5" placeholder="Describe the property (min 20 characters)" required></textarea>
+                <div class="field-error" data-error-for="description" hidden></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Type & Purpose -->
+          <div class="form-section">
+            <h3>Property Type & Purpose</h3>
+            <div class="form-grid">
+              <div class="field">
+                <label for="propertyType">Property Type *</label>
+                <select name="propertyType" id="propertyType" required>
+                  <option value="house">House</option>
+                  <option value="apartment">Apartment</option>
+                  <option value="commercial">Commercial</option>
+                  <option value="plot">Plot</option>
+                  <option value="office">Office</option>
+                  <option value="shop">Shop</option>
+                </select>
+                <div class="field-error" data-error-for="propertyType" hidden></div>
+              </div>
+              <div class="field">
+                <label for="purpose">Purpose *</label>
+                <select name="purpose" id="purpose" required>
+                  <option value="sale">For Sale</option>
+                  <option value="purchase">For Purchase</option>
+                </select>
+                <div class="field-error" data-error-for="purpose" hidden></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pricing -->
+          <div class="form-section">
+            <h3>Pricing</h3>
+            <div class="form-grid">
+              <div class="field">
+                <label for="price">Price *</label>
+                <input type="number" name="price" id="price" min="0" required />
+                <div class="field-error" data-error-for="price" hidden></div>
+              </div>
+              <div class="field">
+                <label for="currency">Currency</label>
+                <select name="currency" id="currency">
+                  <option value="PKR">PKR</option>
+                  <option value="USD">USD</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Location -->
+          <div class="form-section">
+            <h3>Location</h3>
+            <div class="form-grid">
+              <div class="field">
+                <label for="location">Address / Location *</label>
+                <input type="text" name="location" id="location" required />
+                <div class="field-error" data-error-for="location" hidden></div>
+              </div>
+              <div class="field">
+                <label for="city">City *</label>
+                <input type="text" name="city" id="city" required />
+                <div class="field-error" data-error-for="city" hidden></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Details -->
+          <div class="form-section">
+            <h3>Property Details</h3>
+            <div class="form-grid">
+              <div class="field">
+                <label for="area">Area *</label>
+                <input type="number" name="area" id="area" min="0" required />
+                <div class="field-error" data-error-for="area" hidden></div>
+              </div>
+              <div class="field">
+                <label for="areaUnit">Area Unit</label>
+                <select name="areaUnit" id="areaUnit">
+                  <option value="sqft">sq ft</option>
+                  <option value="sqm">sq m</option>
+                  <option value="marla">Marla</option>
+                  <option value="kanal">Kanal</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="bedrooms">Bedrooms</label>
+                <input type="number" name="bedrooms" id="bedrooms" min="0" max="50" value="0" />
+                <div class="field-error" data-error-for="bedrooms" hidden></div>
+              </div>
+              <div class="field">
+                <label for="bathrooms">Bathrooms</label>
+                <input type="number" name="bathrooms" id="bathrooms" min="0" max="50" value="0" />
+                <div class="field-error" data-error-for="bathrooms" hidden></div>
+              </div>
+              <div class="field">
+                <label for="parking">Parking Spaces</label>
+                <input type="number" name="parking" id="parking" min="0" max="50" value="0" />
+                <div class="field-error" data-error-for="parking" hidden></div>
+              </div>
+              <div class="field">
+                <label for="yearBuilt">Year Built</label>
+                <input type="number" name="yearBuilt" id="yearBuilt" min="1800" max="2200" />
+                <div class="field-error" data-error-for="yearBuilt" hidden></div>
+              </div>
+              <div class="field">
+                <label for="furnished">Furnished</label>
+                <select name="furnished" id="furnished">
+                  <option value="unfurnished">Unfurnished</option>
+                  <option value="semi">Semi-furnished</option>
+                  <option value="furnished">Fully Furnished</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="constructionStatus">Construction Status</label>
+                <input type="text" name="constructionStatus" id="constructionStatus" placeholder="e.g. Completed" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Features & Amenities -->
+          <div class="form-section">
+            <h3>Features & Amenities</h3>
+            <div class="form-grid">
+              <div class="field full">
+                <label for="features">Property Features (comma-separated)</label>
+                <input type="text" name="features" id="features" placeholder="Garden, Balcony, Modern Kitchen" />
+              </div>
+              <div class="field full">
+                <label for="amenities">Amenities (comma-separated)</label>
+                <input type="text" name="amenities" id="amenities" placeholder="AC, CCTV, Internet" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Images -->
+          <div class="form-section">
+            <h3>Images</h3>
+            <div class="form-grid">
+              <div class="field full">
+                <label for="images">Image URLs (one per line)</label>
+                <textarea name="images" id="images" rows="4" placeholder="https://example.com/photo1.jpg&#10;https://example.com/photo2.jpg"></textarea>
+                <p class="muted" style="font-size:var(--fs-xs);margin-top:4px;">Direct image URLs. Upload infrastructure will be added in a future phase.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Publishing -->
+          <div class="form-section">
+            <h3>Publishing</h3>
+            <div class="form-grid">
+              <div class="field" id="statusField" hidden>
+                <label for="status">Status (admin only)</label>
+                <select name="status" id="status">
+                  <option value="available">Available</option>
+                  <option value="pending">Pending</option>
+                  <option value="sold">Sold</option>
+                </select>
+              </div>
+              <div class="field">
+                <label class="checkbox-line" style="text-transform:none;letter-spacing:0;font-weight:500;">
+                  <input type="checkbox" name="isPublished" id="isPublished" /> Publish this property
+                </label>
+              </div>
+              <div class="field" id="featuredField" hidden>
+                <label class="checkbox-line" style="text-transform:none;letter-spacing:0;font-weight:500;">
+                  <input type="checkbox" name="featured" id="featured" /> Mark as Featured
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-actions-row">
+            <button type="submit" class="btn btn-primary btn-lg" id="pfSubmit">Create Property</button>
+            <a href="manage-properties.html" class="btn btn-ghost">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-bottom-inner">
+      <p>&copy; <span id="year"></span> EstateHub. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/state/session.js"></script>
+  <script src="js/ui/navbar.js"></script>
+  <script src="js/pages/property-form.js"></script>
+  <script>document.addEventListener('DOMContentLoaded',()=>{const y=document.getElementById('year');if(y)y.textContent=new Date().getFullYear();});</script>
+  <script src="js/notifications.js"></script>
+  <script src="js/data/properties.data.js"></script>
+  <script src="js/data/fallback.js"></script>
+</body>
+</html>

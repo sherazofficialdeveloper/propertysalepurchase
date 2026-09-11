@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Your saved properties on EstateHub." />
+  <title>Saved Properties — EstateHub</title>
+
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/home.css" />
+  <link rel="stylesheet" href="css/properties.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="stylesheet" href="css/notifications.css" />
+</head>
+<body>
+
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="EstateHub home">
+        <span class="brand-mark" aria-hidden="true">E</span>
+        <span class="brand-name">Estate<span>Hub</span></span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="properties.html" class="nav-link">Properties</a></li>
+          <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="nav-actions"></div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="pd-breadcrumb-bar">
+      <div class="container">
+        <nav class="pd-breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <span aria-hidden="true">/</span>
+          <a href="dashboard.html">Dashboard</a>
+          <span aria-hidden="true">/</span>
+          <span class="crumb-current">Saved Properties</span>
+        </nav>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <header class="section-head-row">
+          <div>
+            <h1 style="font-size: clamp(1.5rem, 3vw, var(--fs-2xl));">Saved Properties</h1>
+            <p>Keep track of properties you may want to explore later. <span class="muted" id="favCount"></span></p>
+          </div>
+          <a href="properties.html" class="btn btn-outline">Browse Properties</a>
+        </header>
+
+        <div class="property-grid" id="favGrid"></div>
+
+        <div class="state-card mt-6" id="favEmpty" hidden>
+          <div class="state-icon" aria-hidden="true">♡</div>
+          <h3>No Saved Properties Yet</h3>
+          <p>Save properties you like and come back to them later.</p>
+          <a href="properties.html" class="btn btn-primary">Browse Properties</a>
+        </div>
+
+        <div class="state-card mt-6" id="favError" hidden>
+          <div class="state-icon" aria-hidden="true">⚠</div>
+          <h3>Unable to Load Saved Properties</h3>
+          <p>Something went wrong. Please try again.</p>
+          <button type="button" class="btn btn-primary" id="favRetry">Try Again</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-bottom-inner">
+      <p>&copy; <span id="year"></span> EstateHub. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/state/session.js"></script>
+  <script src="js/ui/navbar.js"></script>
+  <script src="js/ui/share.js"></script>
+  <script src="js/favorites.js"></script>
+  <script src="js/ui/property-card.js"></script>
+  <script src="js/pages/favorites.js"></script>
+  <script>document.addEventListener('DOMContentLoaded',()=>{const y=document.getElementById('year');if(y)y.textContent=new Date().getFullYear();});</script>
+  <script src="js/notifications.js"></script>
+  <script src="js/data/properties.data.js"></script>
+  <script src="js/data/fallback.js"></script>
+</body>
+</html>

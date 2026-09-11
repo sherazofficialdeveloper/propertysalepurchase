@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Your in-app notifications." />
+  <title>Notifications — EstateHub</title>
+
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/home.css" />
+  <link rel="stylesheet" href="css/properties.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="stylesheet" href="css/notifications.css" />
+</head>
+<body>
+
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="EstateHub home">
+        <span class="brand-mark" aria-hidden="true">E</span>
+        <span class="brand-name">Estate<span>Hub</span></span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="properties.html" class="nav-link">Properties</a></li>
+          <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="nav-actions"></div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="pd-breadcrumb-bar">
+      <div class="container">
+        <nav class="pd-breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <span aria-hidden="true">/</span>
+          <a href="dashboard.html">Dashboard</a>
+          <span aria-hidden="true">/</span>
+          <span class="crumb-current">Notifications</span>
+        </nav>
+      </div>
+    </div>
+
+    <section class="nf-page">
+      <div class="container">
+        <header class="nf-head">
+          <div>
+            <h1>Notifications</h1>
+            <p id="nfSummary">Loading…</p>
+          </div>
+          <button type="button" class="btn btn-outline" id="nfMarkAll">Mark All as Read</button>
+        </header>
+
+        <div class="nf-filters" role="tablist">
+          <button type="button" class="is-active" data-filter="all">All</button>
+          <button type="button" data-filter="unread">Unread</button>
+          <button type="button" data-filter="read">Read</button>
+        </div>
+
+        <div class="nf-list" id="nfList"></div>
+
+        <div class="state-card mt-6" id="nfEmpty" hidden>
+          <div class="state-icon" aria-hidden="true">🔔</div>
+          <h3>You're all caught up.</h3>
+          <p>You have no notifications right now.</p>
+        </div>
+
+        <div class="state-card mt-6" id="nfError" hidden>
+          <div class="state-icon" aria-hidden="true">⚠</div>
+          <h3>Unable to Load Notifications</h3>
+          <p id="nfErrorMessage">Please try again.</p>
+          <button type="button" class="btn btn-primary" id="nfRetry">Try Again</button>
+        </div>
+
+        <nav class="nf-pagination" id="nfPagination" aria-label="Pagination"></nav>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-bottom-inner">
+      <p>&copy; <span id="year"></span> EstateHub. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/state/session.js"></script>
+  <script src="js/ui/navbar.js"></script>
+  <script src="js/ui/share.js"></script>
+  <script src="js/notifications.js"></script>
+  <script src="js/pages/notifications.js"></script>
+  <script>document.addEventListener('DOMContentLoaded',()=>{const y=document.getElementById('year');if(y)y.textContent=new Date().getFullYear();});</script>
+</body>
+</html>

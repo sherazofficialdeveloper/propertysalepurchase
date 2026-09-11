@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contact EstateHub — send a general inquiry or a property-specific inquiry." />
+  <title>Contact — EstateHub</title>
+
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/home.css" />
+  <link rel="stylesheet" href="css/properties.css" />
+  <link rel="stylesheet" href="css/property-details.css" />
+  <link rel="stylesheet" href="css/contact.css" />
+  <link rel="stylesheet" href="css/notifications.css" />
+</head>
+<body>
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <span class="topbar-msg">Find your perfect property with confidence</span>
+      <div class="topbar-links">
+        <a href="tel:+920000000000">+92 000 000 0000</a>
+        <span class="topbar-divider" aria-hidden="true"></span>
+        <a href="mailto:hello@estatehub.test">hello@estatehub.test</a>
+        <span class="topbar-divider" aria-hidden="true"></span>
+        <a href="login.html" class="topbar-auth">Login / Register</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="EstateHub home">
+        <span class="brand-mark" aria-hidden="true">E</span>
+        <span class="brand-name">Estate<span>Hub</span></span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="properties.html" class="nav-link">Properties</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="contact.html" class="nav-link is-active">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+          <a href="login.html" class="btn btn-ghost">Login</a>
+          <a href="register.html" class="btn btn-outline">Register</a>
+          <a href="property-form.html" class="btn btn-gold">List Property</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero + breadcrumb -->
+    <section class="contact-hero">
+      <div class="container">
+        <nav class="pd-breadcrumb" id="crumbs" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <span aria-hidden="true">/</span>
+          <span class="crumb-current">Contact</span>
+        </nav>
+        <h1>Let's Talk About Your Property</h1>
+        <p>Have a question, want to buy a property, or want to list your property? Send us a message and our team will get back to you.</p>
+      </div>
+    </section>
+
+    <!-- Contact info cards -->
+    <div class="container">
+      <div class="contact-info-grid">
+        <div class="contact-info-card">
+          <div class="ci-icon" aria-hidden="true">📞</div>
+          <h3>Call Us</h3>
+          <p><a href="tel:+920000000000">+92 000 000 0000</a></p>
+        </div>
+        <div class="contact-info-card">
+          <div class="ci-icon" aria-hidden="true">✉</div>
+          <h3>Email Us</h3>
+          <p><a href="mailto:hello@estatehub.test">hello@estatehub.test</a></p>
+        </div>
+        <div class="contact-info-card">
+          <div class="ci-icon" aria-hidden="true">📍</div>
+          <h3>Visit Us</h3>
+          <p>Office #12, Blue Area, Islamabad</p>
+        </div>
+        <div class="contact-info-card">
+          <div class="ci-icon" aria-hidden="true">🕘</div>
+          <h3>Working Hours</h3>
+          <p>Mon–Sat, 9:00 AM – 6:00 PM</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main layout: form + side -->
+    <section class="container contact-layout">
+      <div>
+        <!-- Form panel -->
+        <div class="form-panel" id="inquiryFormWrap">
+          <h2>Send an Inquiry</h2>
+          <p class="form-sub">Fill the form below and our team will get back to you shortly.</p>
+
+          <form id="inquiryForm" novalidate>
+            <div class="form-row">
+              <div class="field">
+                <label for="cName">Full Name <span aria-hidden="true">*</span></label>
+                <input type="text" id="cName" name="name" placeholder="Enter your full name" autocomplete="name" required />
+                <div class="field-error" data-error-for="cName" hidden></div>
+              </div>
+              <div class="field">
+                <label for="cEmail">Email Address <span aria-hidden="true">*</span></label>
+                <input type="email" id="cEmail" name="email" placeholder="you@example.com" autocomplete="email" required />
+                <div class="field-error" data-error-for="cEmail" hidden></div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="cPhone">Phone Number <span aria-hidden="true">*</span></label>
+                <input type="tel" id="cPhone" name="phone" placeholder="Enter your phone number" autocomplete="tel" required />
+                <div class="field-error" data-error-for="cPhone" hidden></div>
+              </div>
+              <div class="field">
+                <label for="cInquiryType">Inquiry Type <span aria-hidden="true">*</span></label>
+                <select id="cInquiryType" name="inquiryType" required>
+                  <option value="">Select Inquiry Type</option>
+                  <option value="Buying a Property">Buying a Property</option>
+                  <option value="Selling a Property">Selling a Property</option>
+                  <option value="Property Information">Property Information</option>
+                  <option value="General Inquiry">General Inquiry</option>
+                </select>
+                <div class="field-error" data-error-for="cInquiryType" hidden></div>
+              </div>
+            </div>
+
+            <div class="form-row single">
+              <div class="field">
+                <label for="cProperty">Select Property (optional)</label>
+                <select id="cProperty" name="propertyId">
+                  <option value="">— General Inquiry (No specific property) —</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row single">
+              <div class="field">
+                <label for="cMessage">Message <span aria-hidden="true">*</span></label>
+                <textarea id="cMessage" name="message" placeholder="Tell us how we can help you..." maxlength="1100" required></textarea>
+                <div class="char-counter" id="charCounter">0 / 1000</div>
+                <div class="field-error" data-error-for="cMessage" hidden></div>
+              </div>
+            </div>
+
+            <div class="form-row single">
+              <div class="field">
+                <label>Preferred Contact Method</label>
+                <div class="radio-row" role="radiogroup" aria-label="Preferred contact method">
+                  <label class="radio-pill"><input type="radio" name="preferredContact" value="Email" checked /> Email</label>
+                  <label class="radio-pill"><input type="radio" name="preferredContact" value="Phone" /> Phone</label>
+                  <label class="radio-pill"><input type="radio" name="preferredContact" value="WhatsApp" /> WhatsApp</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary btn-lg" id="submitBtn">Send Inquiry</button>
+            </div>
+
+            <!-- Error banner -->
+            <div class="form-error" id="formError" hidden role="alert" aria-live="assertive">
+              <strong>Unable to Send Inquiry</strong>
+              <span id="formErrorMsg">We couldn't submit your inquiry right now. Please try again.</span>
+              <div style="margin-top:12px;">
+                <button type="button" class="btn btn-outline btn-sm" id="errorRetry">Try Again</button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- Success panel -->
+        <div class="success-panel" id="inquirySuccess" hidden role="status" aria-live="polite">
+          <div class="success-icon" aria-hidden="true">✓</div>
+          <h2>Inquiry Sent Successfully</h2>
+          <p>Thank you for contacting us. Our team will review your inquiry and get back to you.</p>
+          <span class="success-ref" id="successRef"></span>
+          <div class="cta-row">
+            <a href="properties.html" class="btn btn-primary">Back to Properties</a>
+            <a href="index.html" class="btn btn-outline">Return Home</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Side column -->
+      <aside class="contact-side">
+        <!-- Property context card -->
+        <div class="side-panel" id="propertyContext" hidden>
+          <h3>Selected Property</h3>
+          <div class="pc-card">
+            <div class="pc-media"><img id="pcImage" src="" alt="" /></div>
+            <div class="pc-body">
+              <span class="pc-title" id="pcTitle"></span>
+              <span class="pc-loc" id="pcLocation"></span>
+              <span class="pc-price" id="pcPrice"></span>
+              <span class="pc-id">Property ID: <span id="pcId"></span></span>
+            </div>
+            <a href="#" class="btn btn-outline btn-sm" id="pcView">View Property</a>
+          </div>
+        </div>
+
+        <!-- Office details side panel -->
+        <div class="side-panel">
+          <h3>Contact Details</h3>
+          <div class="side-lines">
+            <div class="line"><strong>Phone:</strong> <a href="tel:+920000000000">+92 000 000 0000</a></div>
+            <div class="line"><strong>Email:</strong> <a href="mailto:hello@estatehub.test">hello@estatehub.test</a></div>
+            <div class="line"><strong>Office:</strong> Office #12, Blue Area, Islamabad</div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Office section -->
+    <section class="office-section">
+      <div class="container office-grid">
+        <div class="office-info">
+          <h2>Visit Our Office</h2>
+          <p>Drop by our office for in-person assistance with buying, selling or listing a property.</p>
+          <div class="office-hours">
+            <div class="line"><strong>Monday – Friday</strong> <span>9:00 AM – 6:00 PM</span></div>
+            <div class="line"><strong>Saturday</strong> <span>10:00 AM – 4:00 PM</span></div>
+            <div class="line"><strong>Sunday</strong> <span>Closed</span></div>
+          </div>
+        </div>
+        <div class="map-placeholder" role="img" aria-label="Office map placeholder">
+          <div class="map-placeholder-inner">
+            <strong>Map Location</strong>
+            <small>Blue Area, Islamabad</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section">
+      <div class="container">
+        <header class="section-head">
+          <h2>Frequently Asked Questions</h2>
+          <p>Quick answers to common questions about inquiring and listing.</p>
+        </header>
+        <div class="faq-list" id="faq">
+          <div class="faq-item">
+            <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a1">How can I inquire about a property?</button>
+            <div class="faq-a" id="faq-a1" hidden>Open any property from the Properties page, then click <em>Send Inquiry</em>. You can also reach us through this contact page directly.</div>
+          </div>
+          <div class="faq-item">
+            <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a2">Can I list my own property?</button>
+            <div class="faq-a" id="faq-a2" hidden>Yes. Use the <em>List Property</em> button in the header or select <em>Selling a Property</em> as the inquiry type here and our team will guide you through the process.</div>
+          </div>
+          <div class="faq-item">
+            <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a3">How long does it take to receive a response?</button>
+            <div class="faq-a" id="faq-a3" hidden>Most inquiries receive a response within 24–48 working hours. Priority is given to property-specific inquiries.</div>
+          </div>
+          <div class="faq-item">
+            <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a4">Can I contact an agent directly?</button>
+            <div class="faq-a" id="faq-a4" hidden>Absolutely. Each property page displays its assigned agent with call and email options.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="cta">
+      <div class="container cta-inner">
+        <div>
+          <h2>Looking for your next property?</h2>
+          <p>Browse our available properties and find an option that matches your requirements.</p>
+        </div>
+        <div class="cta-actions">
+          <a href="properties.html" class="btn btn-gold btn-lg">Browse Properties</a>
+          <a href="index.html" class="btn btn-light btn-lg">Go Home</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" id="contact-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="brand">
+          <span class="brand-mark" aria-hidden="true">E</span>
+          <span class="brand-name">Estate<span>Hub</span></span>
+        </a>
+        <p>A modern property marketplace to buy, sell, and explore homes, apartments, plots and commercial spaces with confidence.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="Twitter">t</a>
+          <a href="#" aria-label="Instagram">in</a>
+          <a href="#" aria-label="LinkedIn">li</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="properties.html">Properties</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Categories</h4>
+        <ul>
+          <li><a href="properties.html?type=House">Houses</a></li>
+          <li><a href="properties.html?type=Apartment">Apartments</a></li>
+          <li><a href="properties.html?type=Commercial">Commercial</a></li>
+          <li><a href="properties.html?type=Plot">Plots</a></li>
+          <li><a href="properties.html?type=Office">Offices</a></li>
+          <li><a href="properties.html?type=Shop">Shops</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+920000000000">+92 000 000 0000</a></li>
+          <li><a href="mailto:hello@estatehub.test">hello@estatehub.test</a></li>
+          <li>Office #12, Blue Area, Islamabad</li>
+          <li>Mon-Sat, 9:00am - 6:00pm</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>&copy; <span id="year"></span> EstateHub. All rights reserved.</p>
+        <ul class="footer-legal">
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/data/properties.data.js"></script>
+  <script src="js/data/fallback.js"></script>
+  <script src="js/ui/navbar.js"></script>
+  <script src="js/ui/accordion.js"></script>
+  <script src="js/pages/contact.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const y = document.getElementById('year');
+      if (y) y.textContent = new Date().getFullYear();
+    });
+  </script>
+  <script src="js/notifications.js"></script>
+</body>
+</html>

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="View complete property details, images, specifications and contact the agent." />
+  <title>Property Details — EstateHub</title>
+
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/home.css" />
+  <link rel="stylesheet" href="css/properties.css" />
+  <link rel="stylesheet" href="css/property-details.css" />
+  <link rel="stylesheet" href="css/notifications.css" />
+</head>
+<body>
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <span class="topbar-msg">Find your perfect property with confidence</span>
+      <div class="topbar-links">
+        <a href="tel:+920000000000">+92 000 000 0000</a>
+        <span class="topbar-divider" aria-hidden="true"></span>
+        <a href="mailto:hello@estatehub.test">hello@estatehub.test</a>
+        <span class="topbar-divider" aria-hidden="true"></span>
+        <a href="login.html" class="topbar-auth">Login / Register</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="EstateHub home">
+        <span class="brand-mark" aria-hidden="true">E</span>
+        <span class="brand-name">Estate<span>Hub</span></span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="properties.html" class="nav-link is-active">Properties</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+          <a href="login.html" class="btn btn-ghost">Login</a>
+          <a href="register.html" class="btn btn-outline">Register</a>
+          <a href="property-form.html" class="btn btn-gold">List Property</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Breadcrumb bar -->
+    <div class="pd-breadcrumb-bar">
+      <div class="container">
+        <nav class="pd-breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <span aria-hidden="true">/</span>
+          <a href="properties.html">Properties</a>
+          <span aria-hidden="true">/</span>
+          <span class="crumb-current" id="crumbTitle">Property Details</span>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Loading state -->
+    <section class="pd-skeleton container" id="detailsLoading" hidden>
+      <div class="sk sk-hero"></div>
+      <div class="mt-6"><div class="sk sk-line lg"></div></div>
+      <div class="sk sk-line sm"></div>
+      <div class="sk sk-line"></div>
+      <div class="sk sk-line"></div>
+    </section>
+
+    <!-- Not found -->
+    <section class="section container" id="detailsNotFound" hidden>
+      <div class="state-card">
+        <div class="state-icon" aria-hidden="true">🔍</div>
+        <h3>Property Not Found</h3>
+        <p>The property you are looking for could not be identified.</p>
+        <a href="properties.html" class="btn btn-primary">Back to Properties</a>
+      </div>
+    </section>
+
+    <!-- Error state -->
+    <section class="section container" id="detailsError" hidden>
+      <div class="state-card">
+        <div class="state-icon" aria-hidden="true">⚠</div>
+        <h3>Unable to Load Property</h3>
+        <p>Something went wrong while loading this property.</p>
+        <button type="button" class="btn btn-primary" id="retryBtn">Try Again</button>
+      </div>
+    </section>
+
+    <!-- Actual content -->
+    <div id="detailsRoot" hidden>
+      <!-- Header -->
+      <section class="container pd-header">
+        <div class="pd-header-main">
+          <span class="badge badge-sale" id="pdStatusBadge">Status</span>
+          <h1 id="pdTitle">Property Title</h1>
+          <div class="pd-header-meta">
+            <span id="pdLocation">Location</span>
+            <span class="dot" aria-hidden="true"></span>
+            <span>Type: <strong id="pdType">—</strong></span>
+            <span class="dot" aria-hidden="true"></span>
+            <span id="pdPurpose">Purpose</span>
+            <span class="dot" aria-hidden="true"></span>
+            <span>ID: <strong id="pdPropertyId">—</strong></span>
+          </div>
+        </div>
+
+        <div class="pd-header-side">
+          <div class="pd-price" id="pdPrice">PKR —</div>
+          <div class="pd-header-actions">
+            <button type="button" class="btn btn-outline btn-sm" id="favDetailBtn" aria-pressed="false" aria-label="Add property to favorites">
+              ♡ Save
+            </button>
+            <button type="button" class="btn btn-outline btn-sm" id="shareBtn" aria-label="Share property">
+              ⇪ Share
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Gallery + Overview + Content -->
+      <section class="container">
+        <div class="pd-gallery">
+          <div class="gallery-main" id="galleryMain"></div>
+          <div class="gallery-thumbs" id="galleryThumbs"></div>
+        </div>
+
+        <!-- Overview stats -->
+        <div class="pd-stats">
+          <div class="pd-stat"><div class="stat-value" id="statBeds">—</div><div class="stat-label">Bedrooms</div></div>
+          <div class="pd-stat"><div class="stat-value" id="statBaths">—</div><div class="stat-label">Bathrooms</div></div>
+          <div class="pd-stat"><div class="stat-value" id="statArea">—</div><div class="stat-label">Sq Ft</div></div>
+          <div class="pd-stat"><div class="stat-value" id="statParking">—</div><div class="stat-label">Parking</div></div>
+          <div class="pd-stat"><div class="stat-value" id="statType">—</div><div class="stat-label">Type</div></div>
+          <div class="pd-stat"><div class="stat-value" id="statStatus">—</div><div class="stat-label">Status</div></div>
+        </div>
+
+        <!-- Content: main + sidebar -->
+        <div class="pd-content">
+          <div class="pd-main">
+            <!-- Info grid -->
+            <div class="pd-panel">
+              <h2>Property Information</h2>
+              <div class="info-grid">
+                <div class="info-row"><span class="info-label">Price</span><span class="info-value" id="infoPrice">—</span></div>
+                <div class="info-row"><span class="info-label">Purpose</span><span class="info-value" id="infoPurpose">—</span></div>
+                <div class="info-row"><span class="info-label">Type</span><span class="info-value" id="infoType">—</span></div>
+                <div class="info-row"><span class="info-label">Status</span><span class="info-value" id="infoStatus">—</span></div>
+                <div class="info-row"><span class="info-label">Area</span><span class="info-value" id="infoArea">—</span></div>
+                <div class="info-row"><span class="info-label">Bedrooms</span><span class="info-value" id="infoBeds">—</span></div>
+                <div class="info-row"><span class="info-label">Bathrooms</span><span class="info-value" id="infoBaths">—</span></div>
+                <div class="info-row"><span class="info-label">Parking</span><span class="info-value" id="infoParking">—</span></div>
+              </div>
+            </div>
+
+            <!-- Description -->
+            <div class="pd-panel">
+              <h2>Property Description</h2>
+              <p class="pd-description" id="pdDescription">—</p>
+              <button type="button" class="read-more-btn" id="readMoreBtn">Read More</button>
+            </div>
+
+            <!-- Features -->
+            <div class="pd-panel">
+              <h2>Property Features</h2>
+              <ul class="pd-list" id="pdFeatures"></ul>
+            </div>
+
+            <!-- Amenities -->
+            <div class="pd-panel">
+              <h2>Amenities</h2>
+              <ul class="pd-list" id="pdAmenities"></ul>
+            </div>
+
+            <!-- Specifications -->
+            <div class="pd-panel">
+              <h2>Specifications</h2>
+              <div class="info-grid">
+                <div class="info-row"><span class="info-label">Property Type</span><span class="info-value" id="specType">—</span></div>
+                <div class="info-row"><span class="info-label">Purpose</span><span class="info-value" id="specPurpose">—</span></div>
+                <div class="info-row"><span class="info-label">Status</span><span class="info-value" id="specStatus">—</span></div>
+                <div class="info-row"><span class="info-label">Construction</span><span class="info-value" id="specConstruction">—</span></div>
+                <div class="info-row"><span class="info-label">Area</span><span class="info-value" id="specArea">—</span></div>
+                <div class="info-row"><span class="info-label">Bedrooms</span><span class="info-value" id="specBeds">—</span></div>
+                <div class="info-row"><span class="info-label">Bathrooms</span><span class="info-value" id="specBaths">—</span></div>
+                <div class="info-row"><span class="info-label">Parking</span><span class="info-value" id="specParking">—</span></div>
+                <div class="info-row"><span class="info-label">Year Built</span><span class="info-value" id="specYear">—</span></div>
+                <div class="info-row"><span class="info-label">Furnished</span><span class="info-value" id="specFurnished">—</span></div>
+              </div>
+            </div>
+
+            <!-- Location -->
+            <div class="pd-panel">
+              <h2>Property Location</h2>
+              <div class="info-grid">
+                <div class="info-row"><span class="info-label">City</span><span class="info-value" id="locCity">—</span></div>
+                <div class="info-row"><span class="info-label">Area</span><span class="info-value" id="locArea">—</span></div>
+              </div>
+              <p class="mt-4 muted" id="locFull">—</p>
+              <div class="map-placeholder mt-6" role="img" aria-label="Map placeholder">
+                <div class="map-placeholder-inner">
+                  <strong>Map Location</strong>
+                  <small id="mapCity">—</small>
+                </div>
+              </div>
+            </div>
+
+            <!-- Nearby -->
+            <div class="pd-panel">
+              <h2>What's Nearby?</h2>
+              <ul class="nearby-list" id="pdNearby"></ul>
+              <p class="mt-4 muted" style="font-size: var(--fs-xs);">Distances shown are indicative placeholders until location services are integrated.</p>
+            </div>
+          </div>
+
+          <!-- Sidebar -->
+          <aside class="pd-side">
+            <!-- Agent card -->
+            <div class="pd-panel agent-card">
+              <h3>Property Agent</h3>
+              <div class="agent-head">
+                <img class="agent-avatar" id="agentAvatar" src="" alt="Agent" />
+                <div>
+                  <div class="agent-name" id="agentName">—</div>
+                  <div class="agent-role" id="agentRole">—</div>
+                </div>
+              </div>
+              <div class="agent-lines">
+                <div class="agent-line"><span class="ico" aria-hidden="true">📞</span><span id="agentPhone">—</span></div>
+                <div class="agent-line"><span class="ico" aria-hidden="true">✉</span><span id="agentEmail">—</span></div>
+                <div class="agent-line"><span class="ico" aria-hidden="true">📍</span><span id="agentOffice">—</span></div>
+              </div>
+              <div class="agent-actions">
+                <a href="#" class="btn btn-outline" id="callAgentBtn">Call Agent</a>
+                <a href="#" class="btn btn-outline" id="emailAgentBtn">Email Agent</a>
+              </div>
+            </div>
+
+            <!-- Inquiry CTA -->
+            <div class="inquiry-card">
+              <h3>Interested in this property?</h3>
+              <p>Send an inquiry to receive more information about this property.</p>
+              <a href="#" class="btn btn-gold" id="inquiryBtn">Send Inquiry</a>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- Related properties -->
+      <section class="related-section">
+        <div class="container">
+          <header class="section-head-row">
+            <div>
+              <h2>Similar Properties</h2>
+              <p>You may also like these listings.</p>
+            </div>
+            <a href="properties.html" class="btn btn-outline">Browse All</a>
+          </header>
+          <div class="related-grid property-grid" id="relatedGrid"></div>
+        </div>
+      </section>
+
+      <!-- Bottom CTA -->
+      <section class="cta">
+        <div class="container cta-inner">
+          <div>
+            <h2>Looking for a different property?</h2>
+            <p>Browse the full catalogue or talk to our team.</p>
+          </div>
+          <div class="cta-actions">
+            <a href="properties.html" class="btn btn-gold btn-lg">Browse All Properties</a>
+            <a href="index.html#contact" class="btn btn-light btn-lg">Contact Us</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" id="contact">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="brand">
+          <span class="brand-mark" aria-hidden="true">E</span>
+          <span class="brand-name">Estate<span>Hub</span></span>
+        </a>
+        <p>A modern property marketplace to buy, sell, and explore homes, apartments, plots and commercial spaces with confidence.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="Twitter">t</a>
+          <a href="#" aria-label="Instagram">in</a>
+          <a href="#" aria-label="LinkedIn">li</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="properties.html">Properties</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Categories</h4>
+        <ul>
+          <li><a href="properties.html?type=House">Houses</a></li>
+          <li><a href="properties.html?type=Apartment">Apartments</a></li>
+          <li><a href="properties.html?type=Commercial">Commercial</a></li>
+          <li><a href="properties.html?type=Plot">Plots</a></li>
+          <li><a href="properties.html?type=Office">Offices</a></li>
+          <li><a href="properties.html?type=Shop">Shops</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+920000000000">+92 000 000 0000</a></li>
+          <li><a href="mailto:hello@estatehub.test">hello@estatehub.test</a></li>
+          <li>Office #12, Blue Area, Islamabad</li>
+          <li>Mon-Sat, 9:00am - 6:00pm</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>&copy; <span id="year"></span> EstateHub. All rights reserved.</p>
+        <ul class="footer-legal">
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts (order matters) -->
+  <script src="js/api.js"></script>
+  <script src="js/data/properties.data.js"></script>
+  <script src="js/data/fallback.js"></script>
+  <script src="js/ui/navbar.js"></script>
+  <script src="js/favorites.js"></script>
+  <script src="js/ui/property-card.js"></script>
+  <script src="js/ui/gallery.js"></script>
+  <script src="js/ui/lightbox.js"></script>
+  <script src="js/ui/share.js"></script>
+  <script src="js/pages/property-details.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const y = document.getElementById('year');
+      if (y) y.textContent = new Date().getFullYear();
+    });
+  </script>
+  <script src="js/notifications.js"></script>
+</body>
+</html>
