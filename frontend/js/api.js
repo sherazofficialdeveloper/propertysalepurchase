@@ -1,37 +1,22 @@
 /**
  * Centralized API helper.
- *
- * API_BASE resolution:
- *   • Explicit runtime config (window.APP_CONFIG.API_BASE_URL) if provided
- *   • Local dev (localhost / 127.0.0.1 / 0.0.0.0)  →  http://<host>:5000/api
- *   • Deployed (Vercel, etc.)                       →  https://hafizsabir.up.railway.app/api
- *
- * Only this file knows the backend URL. All pages call Api.* so this
- * is the single place to update when the backend location changes.
+ * Deployed: Vercel serves frontend + rewrites /api/* to Railway (same-origin).
  */
 (function (global) {
   'use strict';
-
-  // ---- Environment config ----
-  const RAILWAY_API_BASE = 'https://hafizsabir.up.railway.app/api';
   const LOCAL_BACKEND_PORT = 5000;
 
   function resolveBaseUrl() {
-    // 1. Explicit runtime override (optional)
-    const configuredBase = global.APP_CONFIG && global.APP_CONFIG.API_BASE_URL;
-    if (typeof configuredBase === 'string' && configuredBase.trim()) {
-      return configuredBase.trim().replace(/\/+$/, '');
-    }
-
-    // 2. Local development
     const host = (window.location.hostname || '').toLowerCase();
     const proto = window.location.protocol === 'https:' ? 'https:' : 'http:';
+    const configured = global.APP_CONFIG && global.APP_CONFIG.API_BASE_URL;
+    if (typeof configured === 'string' && configured.trim()) {
+      return configured.trim().replace(/\/+$/, '');
+    }
     if (host === 'localhost' || host === '127.0.0.1' || host === '0.0.0.0') {
       return proto + '//' + host + ':' + LOCAL_BACKEND_PORT + '/api';
     }
-
-    // 3. Deployed frontends → Railway backend
-    return RAILWAY_API_BASE;
+    return '/api';
   }
 
   const BASE_URL = resolveBaseUrl();
@@ -44,16 +29,13 @@
       credentials: 'include',
     };
     if (body !== undefined) options.body = JSON.stringify(body);
-
     const res = await fetch(BASE_URL + path, options);
     const text = await res.text();
     let data = null;
     try { data = text ? JSON.parse(text) : null; } catch { data = null; }
-
     if (!res.ok) {
       const error = new Error((data && data.message) || ('Request failed (' + res.status + ')'));
-      error.status = res.status;
-      error.data = data;
+      error.status = res.status; error.data = data;
       throw error;
     }
     return data;
