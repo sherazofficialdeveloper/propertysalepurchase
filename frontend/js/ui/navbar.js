@@ -9,7 +9,12 @@
     const nav = document.getElementById('primaryNav');
     const header = document.getElementById('siteHeader');
 
-    if (toggle && nav) {
+    if (toggle && nav && !toggle.dataset.navbarBound) {
+      // Guard against double-initialization (e.g. a page-specific script
+      // calling NavbarUI.init() again) attaching a second click listener,
+      // which would make the two `classList.toggle()` calls cancel each
+      // other out and the menu appear stuck / non-responsive.
+      toggle.dataset.navbarBound = '1';
       toggle.addEventListener('click', () => {
         const open = nav.classList.toggle('is-open');
         toggle.classList.toggle('is-open', open);
@@ -33,4 +38,11 @@
   }
 
   global.NavbarUI = { init };
+
+  // Initialize independently of page-specific scripts so every page gets the same navbar behavior.
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init, { once: true });
+  } else {
+    init();
+  }
 })(window);
